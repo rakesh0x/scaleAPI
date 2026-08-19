@@ -41,6 +41,7 @@ func handleRequest() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, r.URL.Path[1:])
 	})
+	http.HandleFunc("/article", returnAllArticle)
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
 
