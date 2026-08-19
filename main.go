@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
+	"sync"
 )
 
 // import (
@@ -15,8 +16,8 @@ import (
 // )
 
 // mutex for security to shared state
-// var counter int
-// var mutex = &sync.Mutex{}
+var counter int
+var mutex = &sync.Mutex{}
 
 // func echoString(w http.ResponseWriter, r *http.Request) {
 // 	fmt.Fprint(w, "hello")
@@ -37,7 +38,9 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, " Welcome to Dashboard!")
+	mutex.Lock()
 	fmt.Println("Endpoint hit: Dashboard")
+	mutex.Unlock()
 }
 
 // func handleRequest() {
